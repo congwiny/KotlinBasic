@@ -21,6 +21,14 @@ fun main(args: Array<String>) {
     println(describe("other"))
 
     testInOperator()
+
+    println()
+    //when和in的配合使用，判断集合内是否包含某实例
+    val items = setOf("apple", "banana", "kiwi")
+    when {
+        "orange" in items -> println("juicy")
+        "apple" in items -> println("apple is fine too")
+    }
 }
 
 //in 运算符
@@ -35,28 +43,28 @@ fun testInOperator() {
     }
 
     //检测某个数字
-    var list = listOf("a","b","c")
-    if (-1 in 0..list.lastIndex){
+    var list = listOf("a", "b", "c")
+    if (-1 in 0..list.lastIndex) {
         println("-1 is out of range")
     }
 
     //list.indices -> 0..size-1
-    if (list.size !in list.indices){
+    if (list.size !in list.indices) {
         println("list size is out of valid list indices range too")
     }
 
     //in 区间迭代
-    for (x in 1..5){
+    for (x in 1..5) {
         print(x)
     }
     println()
     //或数列迭代 step
-    for (x in 1..10 step 2){
+    for (x in 1..10 step 2) {
         print(x)
     }
     println()
     //递减 downTo
-    for (x in 9 downTo 0 step 3){
+    for (x in 9 downTo 0 step 3) {
         print(x)
     }
 
