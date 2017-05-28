@@ -26,5 +26,23 @@ fun main(args: Array<String>) {
             .map { it.toUpperCase() }
             .forEach { println(it) }
 
+    //map
+    //遍历map (Traversing a map of pairs)
+    //可变的HashMap
+    val map = hashMapOf<String, Int>()
+    map.put("one", 1)
+    map.put("two", 2)
 
+    for ((k, v) in map) {
+        System.out.println("$k -> $v")
+    }
+
+    map["one"]=3
+    System.out.println("map[one] after modify= ${map["one"]}")
+
+
+    //只读的map
+    val map2 = mapOf("one" to 1,"two" to 2)
+    //只能访问map，不能map2["one"]=1
+    println(map2["one"])
 }
