@@ -5,7 +5,7 @@ package com.congwiny.basic
  */
 fun parseInt(str:String):Int?{
 
-    return 1
+    return str.toIntOrNull()
 }
 
 fun printProduct(arg1:String,arg2:String){
