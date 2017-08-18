@@ -45,4 +45,6 @@ fun main(args: Array<String>) {
     val map2 = mapOf("one" to 1,"two" to 2)
     //只能访问map，不能map2["one"]=1
     println(map2["one"])
+
+    val aaa: String = "asd"
 }
