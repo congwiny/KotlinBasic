@@ -24,6 +24,10 @@ public class CallFunction {
 
         //调用Kotlin的提供默认参数值的函数
         System.out.println(StringFunctions.joinToString2(arrayList));
+        //访问Kotlin中的常量
+        System.out.println(StringFunctions.UNIX_LINE_SEPARATOR);
+        //使用get访问器访问顶层属性
+        String name = StringFunctions.getName();
     }
 
     public static <T> String joinToString(Collection<T> collection,

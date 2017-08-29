@@ -6,6 +6,10 @@
 
 package com.congwiny.basic
 
+//相当于Java中的public static final
+const val UNIX_LINE_SEPARATOR = "\n"
+val name = "congwiny"
+
 fun main(args: Array<String>) {
     val list = listOf(1, 2, 3)
     println(list)
