@@ -59,3 +59,10 @@ class CountingSet<T>(val innerList: MutableCollection<T> = HashSet<T>()
         return innerList.addAll(elements)
     }
 }
+
+fun main(args: Array<String>) {
+    val cset = CountingSet<Int>()
+    cset.addAll(listOf(1, 1, 2))
+    println("${cset.objectsAdd} objects were added, ${cset.size} remain")
+    //3 objects were added, 2 remain
+}
