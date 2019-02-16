@@ -1,3 +1,2 @@
 rootProject.name = 'KotlinBasic'
-include 'supportv4'
-
+include 'supportv4', 'jkid'
