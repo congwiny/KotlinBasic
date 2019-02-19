@@ -37,6 +37,11 @@ fun main(args: Array<String>) {
         System.out.println("$k -> $v")
     }
 
+    //通过forEach lambda迭代map
+    map.forEach { key, value -> println("$key -> $value") }
+    //对于具有多个参数的 lambda 表达式，可以使用 _ 字符替换不使用的参数的名称：
+    map.forEach { _, value -> println("$value!") }
+
     map["one"]=3
     System.out.println("map[one] after modify= ${map["one"]}")
 
