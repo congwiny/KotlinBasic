@@ -24,6 +24,13 @@ fun main(args: Array<String>) {
     println(y2) //40
 
     /**
+     *  如果在解构声明中你不需要某个变量，那么可以用下划线取代其名称（自 1.1 起）
+     *  对于以这种方式跳过的组件，不会调用相应的 componentN() 操作符函数。
+     */
+    val (_, yy) = p2
+    println("y=$yy") //40
+
+    /**
      * 解构声明主要使用场景之一，是从一个函数返回多个值，这个非常有用。
      * 如果要这样做，可以定义一个数据类来保存返回所需的值，并将它作为函数的返回类型。
      * 在调用函数后，可以用解构声明的方式，来轻松地展开它，使用其中的值。
@@ -39,6 +46,24 @@ fun main(args: Array<String>) {
     //Oracle -> Java
     //JetBrains -> Kotlin
     printEntries(map)
+    /**
+     * 在 lambda 表达式中解构（自 1.1 起）
+     * 你可以对 lambda 表达式参数使用解构声明语法。
+     * 如果 lambda 表达式具有 Pair 类型（或者 Map.Entry 或任何其他具有相应 componentN 函数的类型）的参数，
+     * 那么可以通过将它们放在括号中来引入多个新参数来取代单个新参数。
+     *
+     * 注意声明两个参数和声明一个解构对来取代单个参数之间的区别：
+     * { a //-> …… } // 一个参数
+     * { a, b //-> …… } // 两个参数
+     * { (a, b) //-> …… } // 一个解构对
+     * { (a, b), c //-> …… } // 一个解构对以及其他参数
+     */
+    println(map.mapValues { (key, value) -> "$key -> $value!" })//{Oracle=Oracle -> Java!, JetBrains=JetBrains -> Kotlin!}
+    //如果解构的参数中的一个组件未使用，那么可以将其替换为下划线，以避免编造其名称：
+    println(map.mapValues { (_, value) -> value })//{Oracle=Java, JetBrains=Kotlin}
+    //你可以指定整个解构的参数的类型或者分别指定特定组件的类型：
+    println(map.mapValues { (_, value): Map.Entry<String, String> -> "$value!" })
+    println(map.mapValues { (_, value: String) -> "$value!" })
 }
 
 /**
