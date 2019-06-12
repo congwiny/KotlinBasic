@@ -16,8 +16,10 @@ fun test1() {
         // 在后台启动一个新的协程并继续
         delay(1000L) // 非阻塞的等待 1 秒钟（默认时间单位是毫秒）
         println("World!") // 在延迟后打印输出
+        println("thread = ${Thread.currentThread()}") //thread = Thread[DefaultDispatcher-worker-1,5,main]
     }
     println("Hello,") // 协程已在等待时主线程还在继续
+    println("thread = ${Thread.currentThread()}") //thread = Thread[main,5,main]
     Thread.sleep(2000L) // 阻塞主线程 2 秒钟来保证 JVM 存活
 }
 
@@ -45,11 +47,13 @@ fun test3() {
         // 在后台启动一个新的协程并继续
         delay(1000L)
         println("World!")
+        println("thread = ${Thread.currentThread()}") //thread = Thread[DefaultDispatcher-worker-2,5,main]
     }
     println("Hello,") // 主线程中的代码会立即执行
     runBlocking {
         // 但是这个表达式阻塞了主线程
         delay(2000L)  // ……我们延迟 2 秒来保证 JVM 的存活
+        println("thread = ${Thread.currentThread()}") //thread = Thread[main,5,main]
     }
 }
 
@@ -64,9 +68,11 @@ fun main1() = runBlocking<Unit> {
         // 在后台启动一个新的协程并继续
         delay(1000L)
         println("World!")
+        println("thread = ${Thread.currentThread()}") //thread = Thread[DefaultDispatcher-worker-1,5,main]
     }
     println("Hello,") // 主协程在这里会立即执行
     delay(2000L)      // 延迟 2 秒来保证 JVM 存活
+    println("thread = ${Thread.currentThread()}") //thread = Thread[main,5,main]
 }
 
 
