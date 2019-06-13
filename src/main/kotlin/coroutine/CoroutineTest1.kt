@@ -12,8 +12,7 @@ import kotlinx.coroutines.*
  *  delay 是一个特殊的 挂起函数 ，它不会造成线程阻塞，但是会 挂起 协程，并且只能在协程中使用。
  */
 fun test1() {
-    GlobalScope.launch {
-        // 在后台启动一个新的协程并继续
+    GlobalScope.launch { // 在后台启动一个新的协程并继续
         delay(1000L) // 非阻塞的等待 1 秒钟（默认时间单位是毫秒）
         println("World!") // 在延迟后打印输出
         println("thread = ${Thread.currentThread()}") //thread = Thread[DefaultDispatcher-worker-1,5,main]
@@ -43,15 +42,14 @@ fun test2() {
  * 调用了 runBlocking 的主线程会一直 阻塞 直到 runBlocking 内部的协程执行完毕。
  */
 fun test3() {
-    GlobalScope.launch {
-        // 在后台启动一个新的协程并继续
+    GlobalScope.launch {  // 在后台启动一个新的协程并继续
         delay(1000L)
         println("World!")
         println("thread = ${Thread.currentThread()}") //thread = Thread[DefaultDispatcher-worker-2,5,main]
     }
     println("Hello,") // 主线程中的代码会立即执行
-    runBlocking {
-        // 但是这个表达式阻塞了主线程
+
+    runBlocking {// 但是这个表达式阻塞了主线程
         delay(2000L)  // ……我们延迟 2 秒来保证 JVM 的存活
         println("thread = ${Thread.currentThread()}") //thread = Thread[main,5,main]
     }
@@ -62,10 +60,8 @@ fun test3() {
  * runBlocking<Unit> { …… } 作为用来启动顶层主协程的适配器。
  * 我们显式指定了其返回类型 Unit，因为在 Kotlin 中 main 函数必须返回 Unit 类型
  */
-fun main1() = runBlocking<Unit> {
-    // 开始执行主协程
-    GlobalScope.launch {
-        // 在后台启动一个新的协程并继续
+fun main1() = runBlocking<Unit> {// 开始执行主协程
+    GlobalScope.launch { // 在后台启动一个新的协程并继续
         delay(1000L)
         println("World!")
         println("thread = ${Thread.currentThread()}") //thread = Thread[DefaultDispatcher-worker-1,5,main]
@@ -82,12 +78,14 @@ fun main1() = runBlocking<Unit> {
  */
 fun main() = runBlocking {
     //sampleStart
+    // 启动一个新协程并保持对这个作业的引用
     val job = GlobalScope.launch {
-        // 启动一个新协程并保持对这个作业的引用
         delay(1000L)
         println("World!")
+        println("thread = ${Thread.currentThread()}") //Thread[DefaultDispatcher-worker-1,5,main]
     }
     println("Hello,")
+    println("thread = ${Thread.currentThread()}") //Thread[main,5,main]
     job.join() // 等待直到子协程执行结束
     //sampleEnd
     //现在，结果仍然相同，但是主协程与后台作业的持续时间没有任何关系了。好多了。
